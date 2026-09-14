@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tourist Place Visit Planner - Project Documentation</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 16mm 14mm 16mm 14mm;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: #1e293b;
+            background-color: #ffffff;
+            line-height: 1.5;
+            font-size: 10.5pt;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Cover / Header Banner */
+        .header-banner {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 60%, #0f766e 100%);
+            color: #ffffff;
+            padding: 24px 28px;
+            border-radius: 10px;
+            margin-bottom: 22px;
+        }
+
+        .header-banner h1 {
+            margin: 0 0 6px 0;
+            font-size: 20pt;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+
+        .header-banner h1 span {
+            color: #2dd4bf;
+        }
+
+        .header-banner p {
+            margin: 0 0 12px 0;
+            color: #cbd5e1;
+            font-size: 11pt;
+            line-height: 1.4;
+        }
+
+        .meta-chips {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .meta-chip {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            padding: 3px 10px;
+            border-radius: 9999px;
+            font-size: 8.5pt;
+            color: #ffffff;
+            font-weight: 500;
+        }
+
+        h2 {
+            color: #0f172a;
+            font-size: 13.5pt;
+            font-weight: 700;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 5px;
+            margin-top: 22px;
+            margin-bottom: 10px;
+            page-break-after: avoid;
+        }
+
+        h3 {
+            color: #0f766e;
+            font-size: 11.5pt;
+            margin-top: 14px;
+            margin-bottom: 6px;
+            page-break-after: avoid;
+        }
+
+        p, ul, ol {
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        ul, ol {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 4px;
+        }
+
+        /* Credentials Callout Card */
+        .cred-card {
+            background: #f0fdfa;
+            border: 1.5px solid #99f6e4;
+            border-left: 5px solid #0d9488;
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin: 14px 0;
+            page-break-inside: avoid;
+        }
+
+        .cred-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 8px;
+        }
+
+        .cred-item {
+            background: #ffffff;
+            border: 1px solid #ccfbf1;
+            padding: 8px 10px;
+            border-radius: 6px;
+        }
+
+        .cred-item span {
+            display: block;
+            font-size: 8pt;
+            color: #64748b;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .cred-item strong {
+            font-size: 10pt;
+            color: #0f766e;
+            font-family: monospace;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0;
+            font-size: 9pt;
+            page-break-inside: auto;
+        }
+
+        tr {
+            page-break-inside: avoid;
+            page-break-after: auto;
+        }
+
+        thead {
+            display: table-header-group;
+        }
+
+        th {
+            background-color: #f1f5f9;
+            color: #1e293b;
+            text-align: left;
+            padding: 7px 9px;
+            font-weight: 700;
+            border: 1px solid #cbd5e1;
+            font-size: 8.5pt;
+        }
+
+        td {
+            padding: 6px 9px;
+            border: 1px solid #e2e8f0;
+            vertical-align: top;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 2px 7px;
+            border-radius: 9999px;
+            font-size: 8pt;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .badge-currency {
+            background: #ecfdf5;
+            color: #065f46;
+            border: 1px solid #a7f3d0;
+            font-family: monospace;
+        }
+
+        .badge-persons {
+            background: #e0f2fe;
+            color: #0369a1;
+            border: 1px solid #bae6fd;
+        }
+
+        code {
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+            background: #f1f5f9;
+            color: #0f172a;
+            padding: 1px 4px;
+            border-radius: 3px;
+            font-size: 9pt;
+        }
+
+        pre {
+            background: #0f172a;
+            color: #e2e8f0;
+            padding: 10px 14px;
+            border-radius: 6px;
+            font-size: 8.5pt;
+            overflow: hidden;
+            margin: 8px 0 12px 0;
+            font-family: monospace;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 10px 0;
+            page-break-inside: avoid;
+        }
+
+        .feature-box {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 10px 12px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+        }
+
+        .feature-box h4 {
+            margin: 0 0 4px 0;
+            color: #0f766e;
+            font-size: 9.5pt;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .feature-box p {
+            margin: 0;
+            font-size: 8.5pt;
+            color: #475569;
+            line-height: 1.35;
+        }
+
+        .page-break {
+            page-break-before: always;
+        }
+
+        .footer-note {
+            margin-top: 25px;
+            padding-top: 10px;
+            border-top: 1px solid #e2e8f0;
+            font-size: 8pt;
+            color: #94a3b8;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Title Banner -->
+    <div class="header-banner">
+        <h1>🌍 Tourist Place <span>Visit Planner</span></h1>
+        <p>Complete Technical Documentation, Architecture Specification &amp; Deployment Manual</p>
+        <div class="meta-chips">
+            <span class="meta-chip">PHP 8.2 (Procedural MySQLi)</span>
+            <span class="meta-chip">Indian Rupee (₹ INR)</span>
+            <span class="meta-chip">Pure Vanilla CSS (Zero Frameworks)</span>
+            <span class="meta-chip">InfinityFree Live Production</span>
+            <span class="meta-chip">OWASP Secure (Prepared Statements &amp; XSS Defense)</span>
+        </div>
+    </div>
+
+    <!-- Live URLs & Demo Access -->
+    <div class="cred-card">
+        <strong style="color: #0f766e; font-size: 10pt;">🌐 Live Deployment &amp; Default Demo Credentials</strong>
+        <div class="cred-grid">
+            <div class="cred-item">
+                <span>Live Website URL</span>
+                <strong style="font-size: 9pt;">touristplanner.infinityfree.io</strong>
+            </div>
+            <div class="cred-item">
+                <span>Demo Username</span>
+                <strong>john_doe</strong>
+            </div>
+            <div class="cred-item">
+                <span>Demo Password</span>
+                <strong>password123</strong>
+            </div>
+        </div>
+    </div>
+
+    <!-- Executive Summary -->
+    <h2>1. Executive Summary &amp; Overview</h2>
+    <p>
+        The <strong>Tourist Place Visit Planner</strong> is a full-stack, lightweight web application built specifically for travelers, backpackers, couples, and tour groups to organize travel itineraries, record visitor counts (<code>persons</code>), track expenses in Indian Rupees (₹ INR), and estimate comprehensive budgets in real-time.
+    </p>
+    <p>
+        The application is architected using procedural PHP with MySQLi prepared statements to guarantee universal compatibility with traditional LAMP/WAMP/XAMPP stacks and shared cloud hosting platforms like <strong>InfinityFree</strong>. It incorporates zero external CSS frameworks, rendering via a custom responsive design system with cards, stats grids, and styled tables.
+    </p>
+
+    <!-- Core Features Grid -->
+    <h2>2. Key Functional Features</h2>
+    <div class="feature-grid">
+        <div class="feature-box">
+            <h4>🔐 User Authentication System</h4>
+            <p>Registration and login with uniqueness checks, Bcrypt hashing (<code>PASSWORD_DEFAULT</code>), <code>password_verify()</code>, and session fixation defense via <code>session_regenerate_id()</code>.</p>
+        </div>
+        <div class="feature-box">
+            <h4>👥 Travellers &amp; Group Sizing</h4>
+            <p>Stores the exact number of persons per journey, auto-calculates per-person expenditure (<code>₹Budget / Persons</code>), and shows total travelers planned.</p>
+        </div>
+        <div class="feature-box">
+            <h4>🧮 Interactive Budget Estimator</h4>
+            <p>Real-time calculation engine (both on <code>add_trip.php</code> and standalone <code>estimator.php</code>) computing itemized breakdowns for Stay (40%), Food (25%), Transport (20%), and Activities (15%).</p>
+        </div>
+        <div class="feature-box">
+            <h4>🔍 Destination Search Filter</h4>
+            <p>Real-time destination search on the dashboard using SQL prepared statements (<code>WHERE user_id = ? AND destination LIKE ?</code>) with clear-filter shortcuts.</p>
+        </div>
+        <div class="feature-box">
+            <h4>🛡️ Multi-Layer Security Architecture</h4>
+            <p>100% prepared statements across all queries, complete XSS escaping via <code>htmlspecialchars()</code>, user data isolation, and friendly error suppression.</p>
+        </div>
+        <div class="feature-box">
+            <h4>⚡ Automatic Dual-Environment Support</h4>
+            <p><code>db.php</code> detects whether it is running on <code>localhost</code> or InfinityFree production, switching credentials dynamically without configuration breakage.</p>
+        </div>
+    </div>
+
+    <!-- Page Break -->
+    <div class="page-break"></div>
+
+    <!-- Database Architecture -->
+    <h2>3. Database Schema &amp; Architecture (MySQL)</h2>
+    <p>
+        The relational schema enforces data integrity through foreign keys with <code>ON DELETE CASCADE</code> so that removing an account automatically purges associated itineraries.
+    </p>
+
+    <h3>Table: <code>users</code></h3>
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 18%;">Field</th>
+                <th style="width: 22%;">Type</th>
+                <th style="width: 15%;">Null / Key</th>
+                <th style="width: 45%;">Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>id</code></td>
+                <td>INT AUTO_INCREMENT</td>
+                <td>PRIMARY KEY</td>
+                <td>Unique user identifier.</td>
+            </tr>
+            <tr>
+                <td><code>username</code></td>
+                <td>VARCHAR(50)</td>
+                <td>UNIQUE, NOT NULL</td>
+                <td>Unique username for login authentication.</td>
+            </tr>
+            <tr>
+                <td><code>email</code></td>
+                <td>VARCHAR(100)</td>
+                <td>UNIQUE, NOT NULL</td>
+                <td>Unique user email address.</td>
+            </tr>
+            <tr>
+                <td><code>password</code></td>
+                <td>VARCHAR(255)</td>
+                <td>NOT NULL</td>
+                <td>Secure Bcrypt hashed password string.</td>
+            </tr>
+            <tr>
+                <td><code>created_at</code></td>
+                <td>TIMESTAMP</td>
+                <td>DEFAULT CURRENT</td>
+                <td>Account creation timestamp.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Table: <code>trips</code></h3>
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 18%;">Field</th>
+                <th style="width: 22%;">Type</th>
+                <th style="width: 15%;">Null / Key</th>
+                <th style="width: 45%;">Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>id</code></td>
+                <td>INT AUTO_INCREMENT</td>
+                <td>PRIMARY KEY</td>
+                <td>Unique trip plan record identifier.</td>
+            </tr>
+            <tr>
+                <td><code>user_id</code></td>
+                <td>INT</td>
+                <td>FOREIGN KEY</td>
+                <td>Links to <code>users(id)</code> with <code>ON DELETE CASCADE</code>.</td>
+            </tr>
+            <tr>
+                <td><code>destination</code></td>
+                <td>VARCHAR(100)</td>
+                <td>NOT NULL</td>
+                <td>Tourist destination, landmark, or city name.</td>
+            </tr>
+            <tr>
+                <td><code>travel_date</code></td>
+                <td>DATE</td>
+                <td>NOT NULL</td>
+                <td>Scheduled departure date.</td>
+            </tr>
+            <tr>
+                <td><code>persons</code></td>
+                <td>INT</td>
+                <td>NOT NULL, DEF 1</td>
+                <td>Number of travellers participating in the visit.</td>
+            </tr>
+            <tr>
+                <td><code>budget</code></td>
+                <td>DECIMAL(10,2)</td>
+                <td>NOT NULL</td>
+                <td>Total estimated trip budget in Indian Rupees (₹ INR).</td>
+            </tr>
+            <tr>
+                <td><code>visitor_email</code></td>
+                <td>VARCHAR(100)</td>
+                <td>NOT NULL</td>
+                <td>Visitor contact email for itinerary notifications.</td>
+            </tr>
+            <tr>
+                <td><code>notes</code></td>
+                <td>TEXT</td>
+                <td>NULL</td>
+                <td>Custom itinerary highlights, bookings, and reminders.</td>
+            </tr>
+            <tr>
+                <td><code>created_at</code></td>
+                <td>TIMESTAMP</td>
+                <td>DEFAULT CURRENT</td>
+                <td>Record creation timestamp.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Raw Sample Trip Data -->
+    <h2>4. Seeded Raw Trips Data (Indian Rupees ₹ INR)</h2>
+    <p>
+        The database contains 10 realistic raw trip records pre-associated with the default demo account (<code>john_doe</code>):
+    </p>
+
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 5%;">#</th>
+                <th style="width: 25%;">Destination</th>
+                <th style="width: 13%;">Travellers</th>
+                <th style="width: 15%;">Total Budget</th>
+                <th style="width: 15%;">Per Person</th>
+                <th style="width: 27%;">Highlights &amp; Notes</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td><strong>Goa Beaches &amp; Waterfalls</strong></td>
+                <td><span class="badge badge-persons">👥 2 Persons</span></td>
+                <td><span class="badge badge-currency">₹28,500.00</span></td>
+                <td>₹14,250.00</td>
+                <td>Baga &amp; Anjuna beach hopping, Dudhsagar Waterfalls trek, sunset cruise.</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td><strong>Manali &amp; Rohtang Pass</strong></td>
+                <td><span class="badge badge-persons">👥 3 Persons</span></td>
+                <td><span class="badge badge-currency">₹36,000.00</span></td>
+                <td>₹12,000.00</td>
+                <td>Solang Valley paragliding, Rohtang snow scooter, Vashisht hot springs.</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td><strong>Jaipur &amp; Udaipur</strong></td>
+                <td><span class="badge badge-persons">👥 4 Persons</span></td>
+                <td><span class="badge badge-currency">₹45,000.00</span></td>
+                <td>₹11,250.00</td>
+                <td>Amber Fort, Hawa Mahal, Lake Pichola sunset boat ride, Dal Baati Churma.</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td><strong>Munnar &amp; Alleppey Backwaters</strong></td>
+                <td><span class="badge badge-persons">👥 2 Persons</span></td>
+                <td><span class="badge badge-currency">₹42,500.00</span></td>
+                <td>₹21,250.00</td>
+                <td>Munnar tea plantations, overnight luxury Alleppey houseboat stay.</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td><strong>Leh-Ladakh &amp; Pangong Tso</strong></td>
+                <td><span class="badge badge-persons">👥 2 Persons</span></td>
+                <td><span class="badge badge-currency">₹68,000.00</span></td>
+                <td>₹34,000.00</td>
+                <td>Khardung La motorbiking, Pangong Tso camping, Magnetic Hill.</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td><strong>Varanasi &amp; Sarnath</strong></td>
+                <td><span class="badge badge-persons">👥 1 Person</span></td>
+                <td><span class="badge badge-currency">₹22,000.00</span></td>
+                <td>₹22,000.00</td>
+                <td>Ganges sunrise boat ride, Dashashwamedh Ghat Aarti, Dhamek Stupa.</td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td><strong>Dubai &amp; Abu Dhabi, UAE</strong></td>
+                <td><span class="badge badge-persons">👥 2 Persons</span></td>
+                <td><span class="badge badge-currency">₹115,000.00</span></td>
+                <td>₹57,500.00</td>
+                <td>Burj Khalifa 148th floor observatory, desert safari with dune bashing.</td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td><strong>Bali &amp; Nusa Penida</strong></td>
+                <td><span class="badge badge-persons">👥 2 Persons</span></td>
+                <td><span class="badge badge-currency">₹92,000.00</span></td>
+                <td>₹46,000.00</td>
+                <td>Mount Batur sunrise trek, Ubud monkey forest, Kelingking T-Rex cliff.</td>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td><strong>Tokyo &amp; Kyoto, Japan</strong></td>
+                <td><span class="badge badge-persons">👥 1 Person</span></td>
+                <td><span class="badge badge-currency">₹185,000.00</span></td>
+                <td>₹185,000.00</td>
+                <td>Fushimi Inari torii gates, Shinkansen bullet train, Shibuya crossing.</td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td><strong>Paris &amp; Swiss Alps, Europe</strong></td>
+                <td><span class="badge badge-persons">👥 2 Persons</span></td>
+                <td><span class="badge badge-currency">₹265,000.00</span></td>
+                <td>₹132,500.00</td>
+                <td>Eiffel Tower &amp; Louvre in Paris, Glacier Express, Matterhorn cable car.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Page Break -->
+    <div class="page-break"></div>
+
+    <!-- Application File Structure -->
+    <h2>5. Project File Architecture</h2>
+    <pre>d:/samar/
+├── database.sql        # MySQL database schema, foreign keys, dummy user & 10 sample trips
+├── db.php              # Smart connection handler (auto-switches localhost vs InfinityFree)
+├── style.css           # Unified responsive CSS design system (zero external frameworks)
+├── header.php          # Session starter, active navbar, user greeting badge & estimator link
+├── footer.php          # Semantic page footer, layout closing tags & quick links
+├── index.php           # Landing page with hero section, 5 feature cards & dynamic CTAs
+├── register.php        # Registration handler with uniqueness validation & Bcrypt hashing
+├── login.php           # Authentication verification via password_verify() & fixation defense
+├── logout.php          # Session termination, cookie invalidation & clean redirect
+├── add_trip.php        # Protected trip creation form with persons & built-in budget estimator
+├── view_trips.php      # Protected trip dashboard, destination search, travellers, & stats
+├── estimator.php       # Standalone interactive trip budget calculation & breakdown tool
+├── setup_db.php        # 1-click cloud database setup runner for InfinityFree
+├── deploy_ftp.ps1      # Automated PowerShell deployment script via FTP
+├── README.md           # Markdown documentation
+└── README.pdf          # Professional print-ready PDF documentation</pre>
+
+    <!-- Trip Budget Estimator Breakdown -->
+    <h2>6. Interactive Trip Budget Estimator Specifications</h2>
+    <p>
+        The budget estimator calculates realistic costs based on duration, traveller count, geographical scope, and travel tiers:
+    </p>
+    <ul>
+        <li><strong>🎒 Budget / Backpacker Tier:</strong> ~₹2,500/day/person (Domestic) | ~₹6,500/day/person (International)</li>
+        <li><strong>🏨 Comfort / Standard Tier:</strong> ~₹5,500/day/person (Domestic) | ~₹13,500/day/person (International)</li>
+        <li><strong>👑 Luxury / Premium Tier:</strong> ~₹14,000/day/person (Domestic) | ~₹32,000/day/person (International)</li>
+    </ul>
+
+    <p><strong>Itemized Component Breakdown Formula:</strong></p>
+    <ul>
+        <li>🏨 <strong>Accommodation &amp; Stay:</strong> 40% of total estimated budget</li>
+        <li>🍽️ <strong>Food &amp; Dining:</strong> 25% of total estimated budget</li>
+        <li>🚕 <strong>Local Transport &amp; Transit:</strong> 20% of total estimated budget</li>
+        <li>🎟️ <strong>Activities, Sightseeing &amp; Buffer:</strong> 15% of total estimated budget</li>
+    </ul>
+
+    <!-- InfinityFree Deployment Summary -->
+    <h2>7. InfinityFree Production Configuration</h2>
+    <p>The production environment on InfinityFree is configured with the following active parameters in <code>db.php</code>:</p>
+    <ul>
+        <li><strong>FTP Host:</strong> <code>ftpupload.net</code> (Port 21)</li>
+        <li><strong>vPanel / FTP User:</strong> <code>if0_42916037</code></li>
+        <li><strong>MySQL Database Host:</strong> <code>sql106.infinityfree.com</code></li>
+        <li><strong>MySQL Database Name:</strong> <code>if0_42916037_TouristPlanner</code></li>
+        <li><strong>Production Web Root:</strong> <code>/htdocs/</code></li>
+        <li><strong>Live Production URL:</strong> <code>https://touristplanner.infinityfree.io/</code></li>
+    </ul>
+
+    <div class="footer-note">
+        <strong>Tourist Place Visit Planner</strong> &bull; Generated &bull; Procedural PHP &amp; MySQLi Web Application
+    </div>
+
+</body>
+</html>
