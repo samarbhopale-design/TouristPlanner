@@ -1,7 +1,8 @@
 
 🌍 Tourist Place Visit Planner
 ​A complete, secure, lightweight web application for planning and organizing tourist visits. Featuring a robust user authentication system and clean custom CSS, this project is built with procedural PHP (MySQLi) and designed specifically for standard LAMP/WAMP/XAMPP environments and shared hosting platforms like InfinityFree.
-​🚀 View Live Deployment | 💻 View Source Code
+​
+https://touristplanner.infinityfree.io/
 
 ---
 
